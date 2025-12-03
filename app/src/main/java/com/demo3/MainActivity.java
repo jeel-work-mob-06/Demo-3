@@ -1,5 +1,6 @@
 package com.demo3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
         Button login,signup; // can be access in whole file
-        EditText username,password;
+        public static EditText username,password;
         TextView txt_fp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println("Login Succesfully");
                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Username",username.getText().toString());
+                    bundle.putString("Password",password.getText().toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });
