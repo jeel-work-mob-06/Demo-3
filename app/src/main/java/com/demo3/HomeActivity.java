@@ -2,6 +2,7 @@ package com.demo3;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -129,6 +130,32 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
 
+        // Button refrence for hobby
+        Button btn_hobby;
+        btn_hobby = findViewById(R.id.btn_hobby);
 
+        btn_hobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringBuilder sb = new StringBuilder();
+                if(cricket.isChecked()){
+                    // Toast.makeText(HomeActivity.this, cricket.getText().toString(), Toast.LENGTH_SHORT).show();
+                    sb.append(cricket.getText().toString()+"\n");
+                }
+                if (chess.isChecked()) {
+                    //Toast.makeText(HomeActivity.this, chess.getText().toString(), Toast.LENGTH_SHORT).show();
+                    sb.append(chess.getText().toString()+"\n");
+                }
+                if (football.isChecked()) {
+                    //Toast.makeText(HomeActivity.this, football.getText().toString(), Toast.LENGTH_SHORT).show();
+                    sb.append(football.getText().toString()+"\n");
+                }
+                if (hockey.isChecked()){
+                    //Toast.makeText(HomeActivity.this, hockey.getText().toString(), Toast.LENGTH_SHORT).show();
+                    sb.append(hockey.getText().toString()+"\n");
+                }
+                Toast.makeText(HomeActivity.this, sb.toString().trim() , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

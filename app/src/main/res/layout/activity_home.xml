@@ -99,6 +99,7 @@
     <Button
         style="@style/button"
         android:text="Show Hobby"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_marginTop="@dimen/_20sdp"
+        android:id="@+id/btn_hobby"/>
 
 </LinearLayout>
