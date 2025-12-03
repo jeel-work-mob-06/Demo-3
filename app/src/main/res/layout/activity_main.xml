@@ -16,17 +16,21 @@
         android:layout_height="@dimen/_120sdp"
         />
     <EditText
+        android:id="@+id/name_user"
         style="@style/edittext"
         android:layout_marginTop="@dimen/_20sdp"
         android:hint="Username"
         />
     <EditText
+        android:inputType="textPassword"
+        android:id="@+id/name_pass"
         style="@style/edittext"
         android:layout_marginTop="@dimen/_20sdp"
         android:hint="Password"
         />
 
     <TextView
+        android:id="@+id/txt_fp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -36,6 +40,7 @@
         android:textColor="@color/gray"
         android:textSize="@dimen/_10sdp" />
     <Button
+        android:id="@+id/main_btn"
         style="@style/button"
         android:layout_marginTop="@dimen/_50sdp"
         android:text="LOGIN"
@@ -43,6 +48,7 @@
         />
     <Button
         style="@style/button"
+        android:id="@+id/signup"
         android:layout_marginTop="@dimen/_30sdp"
         android:text="NO ACCOUNT YET? SIGNUP NOW"
         app:backgroundTint="@color/yellow"
