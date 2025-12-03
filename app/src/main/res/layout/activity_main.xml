@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:src="@drawable/icon"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        />
+    <EditText
+        style="@style/edittext"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="Username"
+        />
+    <EditText
+        style="@style/edittext"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:hint="Password"
+        />
+    <TextView
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:text="Forgot Password?"
+        android:textColor="@color/gray"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_10sdp"
+        />
+    <Button
+        style="@style/button"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:text="LOGIN"
+        app:backgroundTint="@color/blue"
+        />
+    <Button
+        style="@style/button"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="NO ACCOUNT YET? SIGNUP NOW"
+        app:backgroundTint="@color/yellow"
+        />
+</LinearLayout>
