@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="@dimen/_5sdp">
 
     <ImageView
@@ -17,14 +17,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-
+            android:minLines="2"
+            android:gravity="center"
             style="@style/text_14_bold"
             android:id="@+id/cust_lst_title"/>
         <TextView
+            android:gravity="center"
             android:textColor="@android:color/holo_green_dark"
             style="@style/text_14"
             android:id="@+id/cust_lst_offer"/>
         <TextView
+            android:gravity="center"
+            android:singleLine="true"
             style="@style/text_14"
             android:id="@+id/cust_lst_desc"/>
     </LinearLayout>
