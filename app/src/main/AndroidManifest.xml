@@ -15,18 +15,23 @@
         android:theme="@style/Theme.Demo3"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RecyclerDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".CustomeSecoundListActivity"
             android:exported="true">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CustomListActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".SpinnerListActivity"
             android:exported="true" />

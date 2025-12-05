@@ -1,0 +1,51 @@
+package com.demo3;
+
+import android.os.Bundle;
+import android.view.View;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class RecyclerDemoActivity extends AppCompatActivity {
+
+
+    String[] imageArray = {"https://villman.com/product_photos/h193hq_01.gif",
+            "https://www.animatedimages.org/data/media/474/animated-printer-image-0013.gif",
+            "https://i.pinimg.com/originals/90/92/bd/9092bd8b69197bcf6fe3e903c6315570.gif",
+            "https://d3hjf51r9j54j7.cloudfront.net/wp-content/uploads/sites/9/2021/11/Z8000-Animated-GIF.gif",
+            "https://i.pinimg.com/originals/b6/27/39/b627391ed72a80e98fe10e80deef4e28.gif",
+            "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/7950335/beoplay_loop_2.gif?quality=90&strip=all&crop=0,2.6903425219201,100,94.61931495616"
+    };
+    String[] titleArray = {"Monitor",
+            "Printers",
+            "Fastrack Smartwatches",
+            "Projector",
+            "Best Selling Mobile Speakers",
+            "Best Truewireless Headphones"};
+    String[] offerArray = {"From ₹8279",
+            "From ₹2336",
+            "From ₹1,399",
+            "From ₹6990",
+            "From ₹499*","Grab Now"};
+    String[] decArray = {"DELL",
+            "Canon",
+            "Top Offers | BT Calling",
+            "Egate","Sony,",
+            "boAt & more","boAt, Oneplus & more"};
+    RecyclerView
+            recyclerView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_recycler_demo);
+
+        recyclerView = findViewById(R.id.recycle_demo);
+
+
+        RecyclerDemoAdapter adapter = new RecyclerDemoAdapter(RecyclerDemoActivity.this,imageArray,titleArray,offerArray,decArray);
+        recyclerView.setAdapter(adapter);
+    }
+}

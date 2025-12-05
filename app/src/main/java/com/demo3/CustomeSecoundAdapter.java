@@ -1,12 +1,15 @@
 package com.demo3;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -52,7 +55,26 @@ public class CustomeSecoundAdapter extends BaseAdapter {
         desc.setText(arrayList.get(position).getDec());
         Glide.with(context).asGif().load(arrayList.get(position).getImage()).placeholder(R.mipmap.ic_launcher).into(image);
 
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Image Clicked"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,CustomDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Image",arrayList.get(position).getImage());
+                bundle.putString("Title",arrayList.get(position).getTitle());
+                bundle.putString("Offer",arrayList.get(position).getOffer());
+                bundle.putString("Description",arrayList.get(position).getDec());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 }

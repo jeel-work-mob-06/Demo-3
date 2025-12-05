@@ -1,6 +1,9 @@
 package com.demo3;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -61,6 +64,29 @@ public class CustomeSecoundListActivity extends AppCompatActivity {
 
         CustomeSecoundAdapter custAdepter = new CustomeSecoundAdapter(CustomeSecoundListActivity.this,arrayList);
         listView.setAdapter(custAdepter);
+
+      /*
+            click event for click product and redirect to next page
+      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Intent intent = new Intent(CustomeSecoundListActivity.this,CustomDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("Image",arrayList.get(i).getImage());
+                bundle.putString("Title",arrayList.get(i).getTitle());
+                bundle.putString("Offer",arrayList.get(i).getOffer());
+                bundle.putString("Description",arrayList.get(i).getDec());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });*/
+
+        
+
+
+
+
+
 
     }
 }
