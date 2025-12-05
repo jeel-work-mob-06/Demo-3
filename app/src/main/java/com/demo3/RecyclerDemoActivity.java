@@ -5,6 +5,8 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerDemoActivity extends AppCompatActivity {
@@ -43,6 +45,7 @@ public class RecyclerDemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_demo);
 
         recyclerView = findViewById(R.id.recycle_demo);
+        recyclerView.setLayoutManager(new LinearLayoutManager(RecyclerDemoActivity.this));
 
 
         RecyclerDemoAdapter adapter = new RecyclerDemoAdapter(RecyclerDemoActivity.this,imageArray,titleArray,offerArray,decArray);
