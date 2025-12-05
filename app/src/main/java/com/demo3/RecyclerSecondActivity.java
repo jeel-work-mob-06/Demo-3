@@ -50,7 +50,7 @@ public class RecyclerSecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_second);
 
         recyclerView = findViewById(R.id.recycle_second);
-        recyclerView.setLayoutManager(new LinearLayoutManager(RecyclerSecondActivity.this));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.HORIZONTAL));
 
         arrayList = new ArrayList<>();
         for (int i = 0; i < titleArray.length; i++) {
@@ -64,7 +64,5 @@ public class RecyclerSecondActivity extends AppCompatActivity {
 
         RecyclerSecondAdapter recyclerSecondAdapter = new RecyclerSecondAdapter(RecyclerSecondActivity.this,arrayList);
         recyclerView.setAdapter(recyclerSecondAdapter);
-
-
     }
 }
