@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         txt_fp = findViewById(R.id.txt_fp);
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SignupActivity.class);
+                startActivity(intent);
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
