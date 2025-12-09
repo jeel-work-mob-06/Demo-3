@@ -1,7 +1,10 @@
 package com.demo3;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +22,10 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
         Button login,signup; // can be access in whole file
-        public static EditText username,password;
+        public static EditText email,password;
         TextView txt_fp;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    SQLiteDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
        //  Button login1;  this is limited in this method
         login = findViewById(R.id.main_btn);
-        username = findViewById(R.id.name_user);
+        email = findViewById(R.id.email);
         password = findViewById(R.id.name_pass);
         signup = findViewById(R.id.signup);
         txt_fp = findViewById(R.id.txt_fp);
+
+
+        db = openOrCreateDatabase("user.db",MODE_PRIVATE,null);
+        String tableQuarry = "CREATE TABLE IF NOT EXISTS user(USERID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(50),LASTNAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10))";
+        db.execSQL(tableQuarry);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,23 +55,46 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (username.getText().toString().trim().equals("")) {
-                    username.setError("Username Required");
-                } else if (password.getText().toString().trim().equals("")) {
+                if (email.getText().toString().trim().equals("")) {
+                    email.setError("Username Required");
+                }
+                else if (!email.getText().toString().trim().matches(emailPattern)) {
+                    email.setError("Valid Email Id Required");
+                }else if (password.getText().toString().trim().equals("")) {
                     password.setError("Password Required");
                 } else if (password.getText().toString().trim().length()<6) {
                     password.setError("Password must be 6 charecters");
                 } else {
-                    System.out.println("Login Succesfully");
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();
+                    String selectQuarry = "SELECT * FROM user WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(selectQuarry,null);
+                    if (cursor.getCount()>0){
 
-                    Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Username",username.getText().toString());
-                    bundle.putString("Password",password.getText().toString());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                        while (cursor.moveToNext()){
+
+                            String sUserId = cursor.getString(0);
+                            String sFirstName = cursor.getString(1);
+                            String sLastName = cursor.getString(2);
+                            String sEmail = cursor.getString(3);
+                            String sContact = cursor.getString(4);
+                            String sPassword = cursor.getString(5);
+                            String sGender = cursor.getString(6);
+                            Log.d("Response","User Id : "+sUserId+"\nFirst Name : "+sFirstName+"\nLast Name : "+sLastName+"\nEmail : "+sEmail+"\nContact : "+sContact+"\nPassword : "+sPassword+"\nGender : "+sGender);
+                        }
+                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        /*Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();*/
+                        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email",email.getText().toString());
+                        bundle.putString("Password",password.getText().toString());
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
+                    }
+
+
+
                 }
             }
         });

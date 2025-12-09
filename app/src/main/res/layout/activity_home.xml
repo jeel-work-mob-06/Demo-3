@@ -18,10 +18,10 @@
             android:layout_marginHorizontal="@dimen/_1sdp"
             android:layout_weight="1"
             style="@style/text_14"
-            android:text="Username"
+            android:text="E-mail"
             android:background="@color/blue"/>
         <TextView
-            android:id="@+id/home_user"
+            android:id="@+id/home_email"
             android:layout_marginHorizontal="@dimen/_1sdp"
             android:layout_weight="1"
             style="@style/text_14_bold"

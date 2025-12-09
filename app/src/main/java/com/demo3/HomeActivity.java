@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView username,password;
+    TextView email,password;
     RadioButton male,female;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
 
-        username = findViewById(R.id.home_user);
+        email = findViewById(R.id.home_email);
         password = findViewById(R.id.home_pass);
        /*
          Saprate variable for Radio button
@@ -40,11 +40,11 @@ public class HomeActivity extends AppCompatActivity {
         // Checkbox variables
         CheckBox cricket,hockey,chess,football;
 
-        username.setText(MainActivity.username.getText().toString());
+        email.setText(MainActivity.email.getText().toString());
         password.setText(MainActivity.password.getText().toString());
 
         Bundle bundle = getIntent().getExtras();
-        username.setText(bundle.getString("Username"));
+        email.setText(bundle.getString("Email"));
         password.setText(bundle.getString("Password"));
 
         // Radio Click Event via saprate id of radio buttion

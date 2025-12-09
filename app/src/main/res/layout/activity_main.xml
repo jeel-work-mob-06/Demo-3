@@ -16,10 +16,10 @@
         android:layout_height="@dimen/_120sdp"
         />
     <EditText
-        android:id="@+id/name_user"
+        android:id="@+id/email"
         style="@style/edittext"
         android:layout_marginTop="@dimen/_20sdp"
-        android:hint="Username"
+        android:hint="E-mail"
         />
     <EditText
         android:inputType="textPassword"
