@@ -22,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
-        Button login,signup,users; // can be access in whole file
+        Button login,signup,users,recycler; // can be access in whole file
         public static EditText email,password;
         TextView txt_fp;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         txt_fp = findViewById(R.id.txt_fp);
         users = findViewById(R.id.users);
+        recycler = findViewById(R.id.recycler);
 
         sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
 
@@ -139,6 +140,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,UserListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        recycler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SqliteRecyclerActivity.class);
                 startActivity(intent);
             }
         });

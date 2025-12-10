@@ -60,4 +60,11 @@
         android:text="List Users"
         app:backgroundTint="@color/yellow"
         />
+    <Button
+        style="@style/button"
+        android:id="@+id/recycler"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="List Users"
+        app:backgroundTint="@color/yellow"
+        />
 </LinearLayout>
