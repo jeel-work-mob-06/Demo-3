@@ -1,6 +1,7 @@
 package com.demo3;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txt_fp;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     SQLiteDatabase db;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         signup = findViewById(R.id.signup);
         txt_fp = findViewById(R.id.txt_fp);
 
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
 
         db = openOrCreateDatabase("user.db",MODE_PRIVATE,null);
         String tableQuarry = "CREATE TABLE IF NOT EXISTS user(USERID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(50),LASTNAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10))";
@@ -78,16 +81,32 @@ public class MainActivity extends AppCompatActivity {
                             String sContact = cursor.getString(4);
                             String sPassword = cursor.getString(5);
                             String sGender = cursor.getString(6);
-                            Log.d("Response","User Id : "+sUserId+"\nFirst Name : "+sFirstName+"\nLast Name : "+sLastName+"\nEmail : "+sEmail+"\nContact : "+sContact+"\nPassword : "+sPassword+"\nGender : "+sGender);
+
+                            sp.edit().putString(ConstantSp.UserId,sUserId).commit();
+                            sp.edit().putString(ConstantSp.FirstName,sFirstName).commit();
+                            sp.edit().putString(ConstantSp.LastName,sLastName).commit();
+                            sp.edit().putString(ConstantSp.Email,sEmail).commit();
+                            sp.edit().putString(ConstantSp.Contact,sContact).commit();
+                            sp.edit().putString(ConstantSp.Password,sPassword).commit();
+                            sp.edit().putString(ConstantSp.Gender,sGender).commit();
+
+
+
+                            //Log.d("Response","User Id : "+sUserId+"\nFirst Name : "+sFirstName+"\nLast Name : "+sLastName+"\nEmail : "+sEmail+"\nContact : "+sContact+"\nPassword : "+sPassword+"\nGender : "+sGender);
                         }
-                        Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        /*Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();*/
+
+                        Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                        startActivity(intent);
+
+
+                        /*Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        *//*Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();*//*
                         Intent intent = new Intent(MainActivity.this,HomeActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("Email",email.getText().toString());
                         bundle.putString("Password",password.getText().toString());
                         intent.putExtras(bundle);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
