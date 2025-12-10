@@ -9,6 +9,8 @@
     tools:context=".ProfileActivity">
 
     <ImageView
+        android:visibility="gone"
+        android:id="@+id/profile_image"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_50sdp"
         android:src="@drawable/icon"
@@ -91,9 +93,16 @@
         android:background="@color/yellow"/>
     <Button
         style="@style/button"
+        android:id="@+id/profile_delete"
+        android:text="Delete Profile"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@color/yellow"/>
+    <Button
+        style="@style/button"
         android:id="@+id/profile_logout"
         android:text="Log out"
         android:layout_marginTop="@dimen/_25sdp"
         android:background="@color/yellow"/>
+
 
 </LinearLayout>

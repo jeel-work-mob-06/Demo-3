@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -23,8 +24,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    ImageView image;
     EditText first_name,last_name,email,contact,password,retype;
-    Button submit,edit,logout;
+    Button submit,edit,logout,delete;
     RadioGroup gender;
     RadioButton male,female;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -46,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity {
         String tableQuarry = "CREATE TABLE IF NOT EXISTS user(USERID INTEGER PRIMARY KEY AUTOINCREMENT,FIRSTNAME VARCHAR(50),LASTNAME VARCHAR(50),EMAIL VARCHAR(50),CONTACT VARCHAR(50),PASSWORD VARCHAR(50),GENDER VARCHAR(10))";
         db.execSQL(tableQuarry);
 
-
+        image = findViewById(R.id.profile_image);
         male = findViewById(R.id.gender_male);
         female = findViewById(R.id.gender_female);
         first_name = findViewById(R.id.first_name);
@@ -59,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         gender = findViewById(R.id.gender);
         edit = findViewById(R.id.profile_edit);
         logout = findViewById(R.id.profile_logout);
+        delete = findViewById(R.id.profile_delete);
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -179,12 +182,16 @@ public class ProfileActivity extends AppCompatActivity {
             retype.setVisibility(View.VISIBLE);
             submit.setVisibility(View.VISIBLE);
             edit.setVisibility(View.GONE);
+            delete.setVisibility(View.VISIBLE);
+            image.setVisibility(View.VISIBLE);
+
         }
         else {
             retype.setVisibility(View.GONE);
             submit.setVisibility(View.GONE);
             edit.setVisibility(View.VISIBLE);
-
+            delete.setVisibility(View.GONE);
+            image.setVisibility(View.VISIBLE);
         }
 
 
@@ -218,9 +225,53 @@ public class ProfileActivity extends AppCompatActivity {
                 String updateQuarry = "UPDATE user SET FIRSTNAME='"+first_name.getText().toString()+"',LASTNAME='"+last_name.getText().toString()+"',EMAIL='"+email.getText().toString()+"',CONTACT='"+contact.getText().toString()+"',PASSWORD='"+password.getText().toString()+"',GENDER='"+sGender+"' WHERE USERID='"+sp.getString(ConstantSp.UserId,"")+"'";
                 db.execSQL(updateQuarry);
                 Toast.makeText(ProfileActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
+
+                sp.edit().putString(ConstantSp.FirstName,first_name.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.LastName,last_name.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.Email,email.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.Contact,contact.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.Password,password.getText().toString()).commit();
+                sp.edit().putString(ConstantSp.Gender,sGender).commit();
+                setData(false);
                 Intent intent = new Intent(ProfileActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setTitle("Delete");
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setMessage("Are you sure you want to Delete Data?");
+
+                builder.setPositiveButton("No", (dialog, which) -> {
+                    dialog.dismiss();
+                });
+
+                builder.setNegativeButton("Yes", (dialog, which) -> {
+                    String deleteQuarry = "DELETE FROM user WHERE USERID='"+sp.getString(ConstantSp.UserId,"")+"'";
+                    db.execSQL(deleteQuarry);
+                    sp.edit().clear().commit();
+                    Toast.makeText(ProfileActivity.this, "Profile is Deleted", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProfileActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+
+                });
+                builder.setNeutralButton("Rate us", (dialog, which) -> {
+                    Toast.makeText(ProfileActivity.this, "Rate us", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                });
+
+
+
+                builder.show();
+
+
             }
         });
 

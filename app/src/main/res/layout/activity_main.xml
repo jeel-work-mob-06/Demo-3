@@ -53,4 +53,11 @@
         android:text="NO ACCOUNT YET? SIGNUP NOW"
         app:backgroundTint="@color/yellow"
         />
+    <Button
+        style="@style/button"
+        android:id="@+id/users"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:text="List Users"
+        app:backgroundTint="@color/yellow"
+        />
 </LinearLayout>
