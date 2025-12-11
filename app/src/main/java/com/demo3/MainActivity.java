@@ -22,9 +22,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
-        Button login,signup,users,recycler; // can be access in whole file
-        public static EditText email,password;
-        TextView txt_fp;
+    Button login,signup,users,recycler; // can be access in whole file
+      EditText email,password;
+      TextView txt_fp;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     SQLiteDatabase db;
     SharedPreferences sp;
@@ -70,49 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if (password.getText().toString().trim().length()<6) {
                     password.setError("Password must be 6 charecters");
                 } else {
-                    String selectQuarry = "SELECT * FROM user WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
-                    Cursor cursor = db.rawQuery(selectQuarry,null);
-                    if (cursor.getCount()>0){
 
-                        while (cursor.moveToNext()){
-
-                            String sUserId = cursor.getString(0);
-                            String sFirstName = cursor.getString(1);
-                            String sLastName = cursor.getString(2);
-                            String sEmail = cursor.getString(3);
-                            String sContact = cursor.getString(4);
-                            String sPassword = cursor.getString(5);
-                            String sGender = cursor.getString(6);
-
-                            sp.edit().putString(ConstantSp.UserId,sUserId).commit();
-                            sp.edit().putString(ConstantSp.FirstName,sFirstName).commit();
-                            sp.edit().putString(ConstantSp.LastName,sLastName).commit();
-                            sp.edit().putString(ConstantSp.Email,sEmail).commit();
-                            sp.edit().putString(ConstantSp.Contact,sContact).commit();
-                            sp.edit().putString(ConstantSp.Password,sPassword).commit();
-                            sp.edit().putString(ConstantSp.Gender,sGender).commit();
-
-
-
-                            //Log.d("Response","User Id : "+sUserId+"\nFirst Name : "+sFirstName+"\nLast Name : "+sLastName+"\nEmail : "+sEmail+"\nContact : "+sContact+"\nPassword : "+sPassword+"\nGender : "+sGender);
-                        }
-
-                        Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
-                        startActivity(intent);
-
-
-                        /*Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        *//*Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();*//*
-                        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Email",email.getText().toString());
-                        bundle.putString("Password",password.getText().toString());
-                        intent.putExtras(bundle);
-                        startActivity(intent);*/
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
-                    }
+                    //doSqliteLogin();
 
 
 
@@ -152,5 +111,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void doSqliteLogin() {
+
+        String selectQuarry = "SELECT * FROM user WHERE EMAIL='"+email.getText().toString()+"' AND PASSWORD='"+password.getText().toString()+"'";
+        Cursor cursor = db.rawQuery(selectQuarry,null);
+        if (cursor.getCount()>0){
+
+            while (cursor.moveToNext()){
+
+                String sUserId = cursor.getString(0);
+                String sFirstName = cursor.getString(1);
+                String sLastName = cursor.getString(2);
+                String sEmail = cursor.getString(3);
+                String sContact = cursor.getString(4);
+                String sPassword = cursor.getString(5);
+                String sGender = cursor.getString(6);
+
+                sp.edit().putString(ConstantSp.UserId,sUserId).commit();
+                sp.edit().putString(ConstantSp.FirstName,sFirstName).commit();
+                sp.edit().putString(ConstantSp.LastName,sLastName).commit();
+                sp.edit().putString(ConstantSp.Email,sEmail).commit();
+                sp.edit().putString(ConstantSp.Contact,sContact).commit();
+                sp.edit().putString(ConstantSp.Password,sPassword).commit();
+                sp.edit().putString(ConstantSp.Gender,sGender).commit();
+
+
+
+                //Log.d("Response","User Id : "+sUserId+"\nFirst Name : "+sFirstName+"\nLast Name : "+sLastName+"\nEmail : "+sEmail+"\nContact : "+sContact+"\nPassword : "+sPassword+"\nGender : "+sGender);
+            }
+
+            Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+            startActivity(intent);
+
+
+            /*Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+             *//*Snackbar.make(v, "Login Done", Snackbar.LENGTH_SHORT).show();*//*
+                        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email",email.getText().toString());
+                        bundle.putString("Password",password.getText().toString());
+                        intent.putExtras(bundle);
+                        startActivity(intent);*/
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Invalid Email/Password", Toast.LENGTH_SHORT).show();
+        }
     }
 }

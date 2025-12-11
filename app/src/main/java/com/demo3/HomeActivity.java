@@ -40,9 +40,6 @@ public class HomeActivity extends AppCompatActivity {
         // Checkbox variables
         CheckBox cricket,hockey,chess,football;
 
-        email.setText(MainActivity.email.getText().toString());
-        password.setText(MainActivity.password.getText().toString());
-
         Bundle bundle = getIntent().getExtras();
         email.setText(bundle.getString("Email"));
         password.setText(bundle.getString("Password"));
