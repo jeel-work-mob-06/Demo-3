@@ -80,13 +80,5 @@ public class CustomeSecoundListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });*/
-
-        
-
-
-
-
-
-
     }
 }
